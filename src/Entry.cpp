@@ -1,8 +1,22 @@
 #include "Entry.h"
 
-#include "ll/api/mod/RegisterHelper.h"
+#include <ll/api/memory/Hook.h>
+#include <ll/api/mod/RegisterHelper.h>
+#include <mc/network/packet/ResourcePacksInfoPacket.h>
 
-namespace ModName {
+namespace CoResourcePack {
+
+LL_TYPE_INSTANCE_HOOK(
+    ResourcePackInfoHook,
+    ll::memory::HookPriority::Normal,
+    ResourcePacksInfoPacket,
+    &ResourcePacksInfoPacket::$write,
+    void,
+    BinaryStream& stream
+) {
+    this->mData->mResourcePackRequired = true;
+    return origin(stream);
+}
 
 Entry& Entry::getInstance() {
     static Entry instance;
@@ -10,25 +24,19 @@ Entry& Entry::getInstance() {
 }
 
 bool Entry::load() {
-    getSelf().getLogger().debug("Loading...");
+    ResourcePackInfoHook::hook();
     return true;
 }
 
-bool Entry::enable() {
-    getSelf().getLogger().debug("Enabling...");
-    return true;
-}
+bool Entry::enable() { return true; }
 
 bool Entry::disable() {
-    getSelf().getLogger().debug("Disabling...");
+    ResourcePackInfoHook::unhook();
     return true;
 }
 
-bool Entry::unload() {
-    getSelf().getLogger().debug("Unloading...");
-    return true;
-}
+bool Entry::unload() { return true; }
 
-} // namespace ModName
+} // namespace CoResourcePack
 
-LL_REGISTER_MOD(ModName::Entry, ModName::Entry::getInstance());
+LL_REGISTER_MOD(CoResourcePack::Entry, CoResourcePack::Entry::getInstance());

@@ -1,19 +1,12 @@
-# LeviLamina Mod Template
+# CoResourcePack
 
-Mod Template for LeviLamina
+双端(服务端和客户端)资源包共存模组
 
 ## Usage
 
-For detailed instructions, see the [LeviLamina Documentation](https://lamina.levimc.org/developer_guides/tutorials/create_your_first_mod/)
-
-1. Generate a new repository from this template
-2. Clone the new repository
-3. Change the mod name and the expected LeviLamina version in `xmake.lua`
-4. Add your code.
-5. Run `xmake f -y -p windows -a x64 -m release` in the root of the repository
-6. Run `xmake` to build the mod.
-
-After a successful build, you will find mod in `bin/`
+1. 下载模组并把模组复制到你的模组目录下
+2. 确保`server.properties`中`texturepack-required`的值为`false`
+3. 加载模组，即可正常使用
 
 ## Contributing
 
@@ -21,6 +14,3 @@ Ask questions by creating an issue.
 
 PRs accepted.
 
-## License
-
-CC0-1.0 © LiteLDev

@@ -2,7 +2,7 @@
 
 #include "ll/api/mod/NativeMod.h"
 
-namespace ModName {
+namespace CoResourcePack {
 
 class Entry {
 
@@ -29,4 +29,4 @@ private:
     ll::mod::NativeMod& mSelf;
 };
 
-} // namespace ModName
+} // namespace CoResourcePack
